@@ -98,34 +98,34 @@ jQuery(document).ready(function ($) {
 
 
 //    featured slider
-    $('.featured_slider').slick({
-        centerMode: true,
-        dote: true,
-        centerPadding: '60px',
-        slidesToShow: 3,
-        speed: 1500,
-        index: 2,
-        responsive: [
-            {
-                breakpoint: 768,
-                settings: {
-                    arrows: false,
-                    centerMode: true,
-                    centerPadding: '40px',
-                    slidesToShow: 1
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    arrows: false,
-                    centerMode: true,
-                    centerPadding: '40px',
-                    slidesToShow: 1
-                }
-            }
-        ]
+document.addEventListener('DOMContentLoaded', function () {
+    const sliderContainer = document.getElementById('featured_slider');
+    const slides = Array.from(sliderContainer.children);
+
+    // 슬라이더 중앙으로 이동하는 함수
+    function moveToCenter(index) {
+        // 각 슬라이드의 너비와 슬라이더 컨테이너의 중앙 위치를 계산
+        const slideWidth = slides[0].offsetWidth + 20; // 이미지 너비와 간격 포함
+        const containerCenter = sliderContainer.offsetWidth / 2;
+
+        // 클릭한 이미지의 위치가 중앙으로 오도록 오프셋 계산
+        const offset = (slideWidth * index + slideWidth / 2) - containerCenter;
+        
+        // 슬라이더 컨테이너 이동
+        sliderContainer.style.transform = `translateX(-${offset}px)`;
+    }
+
+    // 각 슬라이드에 클릭 이벤트 추가 및 로그 확인
+    slides.forEach((slide, index) => {
+        slide.addEventListener('click', function () {
+            console.log("클릭되었습니다"); // 콘솔에 메시지 출력
+            moveToCenter(index); // 클릭된 슬라이드를 중앙으로 이동
+        });
     });
+});
+
+
+
 
 
 
